@@ -29,6 +29,14 @@ node dashboard/server.js
 
 Открой `http://localhost:4173`.
 
+Static dashboard для GitHub Pages:
+
+```bash
+node scripts/build-static-dashboard.js
+```
+
+GitHub Pages workflow публикует `dashboard/public` и обновляет JSON-данные каждые 6 часов.
+
 Публичные активные рынки Polymarket:
 
 ```bash

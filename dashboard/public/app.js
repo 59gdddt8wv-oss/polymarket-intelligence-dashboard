@@ -7,11 +7,11 @@ const state = {
 };
 
 const endpoints = {
-  smart: "/api/telegram-report",
-  markets: "/api/markets",
-  sentiment: "/api/sentiment-vs-price",
-  arbs: "/api/arbs",
-  baskets: "/api/baskets"
+  smart: { api: "/api/telegram-report", static: "data/smart-money.json" },
+  markets: { api: "/api/markets", static: "data/markets.json" },
+  sentiment: { api: "/api/sentiment-vs-price", static: "data/sentiment-vs-price.json" },
+  arbs: { api: "/api/arbs", static: "data/arbs.json" },
+  baskets: { api: "/api/baskets", static: "data/baskets.json" }
 };
 
 document.querySelector("#refresh-all").addEventListener("click", refreshAll);
@@ -32,15 +32,36 @@ async function refreshAll() {
 async function load(key) {
   setStatus(key, "Loading...");
   try {
-    const response = await fetch(endpoints[key]);
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Request failed");
+    const data = await fetchData(key);
     state[key] = data;
     render(key, data);
     setStatus(key, `${data.count ?? data.reportedWallets ?? data.results?.length ?? 0} rows`);
   } catch (error) {
     setStatus(key, error.message);
   }
+}
+
+async function fetchData(key) {
+  const endpoint = endpoints[key];
+  const urls = isStaticHost() ? [endpoint.static] : [endpoint.api, endpoint.static];
+
+  let lastError;
+  for (const url of urls) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Request failed");
+      return data;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError || new Error("Request failed");
+}
+
+function isStaticHost() {
+  return location.hostname.endsWith("github.io") || location.protocol === "file:";
 }
 
 function render(key, data) {

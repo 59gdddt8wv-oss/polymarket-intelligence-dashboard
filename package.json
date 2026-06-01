@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Small CLI for Falcon Polymarket Analytics and public Polymarket market discovery.",
   "scripts": {
+    "build:dashboard": "node scripts/build-static-dashboard.js",
     "dashboard": "node dashboard/server.js",
     "polymarket": "node src/cli.js",
     "help": "node src/cli.js help"
