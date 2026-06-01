@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polymarket Intelligence</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Falcon + Polymarket analytics</p>
+          <h1>Polymarket Intelligence</h1>
+        </div>
+        <button id="refresh-all" class="primary">Refresh all</button>
+      </header>
+
+      <section class="metrics" aria-label="Smart money summary">
+        <article>
+          <span>Total PnL 15d</span>
+          <strong id="metric-pnl">...</strong>
+        </article>
+        <article>
+          <span>Average win rate</span>
+          <strong id="metric-winrate">...</strong>
+        </article>
+        <article>
+          <span>Average ROI</span>
+          <strong id="metric-roi">...</strong>
+        </article>
+        <article>
+          <span>Strong watch</span>
+          <strong id="metric-strong">...</strong>
+        </article>
+      </section>
+
+      <section class="toolbar">
+        <button data-load="smart">Smart money</button>
+        <button data-load="markets">Markets</button>
+        <button data-load="sentiment">Sentiment vs price</button>
+        <button data-load="arbs">Cross-exchange arbs</button>
+        <button data-load="baskets">Basket arbs</button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Smart Money Watchlist</h2>
+            <p id="smart-status">Loading...</p>
+          </div>
+        </div>
+        <div id="smart-table" class="table"></div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Active Markets</h2>
+              <p id="markets-status">Not loaded</p>
+            </div>
+          </div>
+          <div id="markets-list" class="cards"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Signals</h2>
+              <p id="signals-status">Not loaded</p>
+            </div>
+          </div>
+          <div id="signals-list" class="cards"></div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Polymarket vs Kalshi</h2>
+              <p id="arbs-status">Not loaded</p>
+            </div>
+          </div>
+          <div id="arbs-list" class="cards"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Basket Arbs</h2>
+              <p id="baskets-status">Not loaded</p>
+            </div>
+          </div>
+          <div id="baskets-list" class="cards"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
