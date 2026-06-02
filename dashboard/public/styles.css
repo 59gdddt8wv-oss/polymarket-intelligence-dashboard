@@ -167,6 +167,19 @@ td code {
   font-size: 12px;
 }
 
+.wallet-link {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.wallet-link:hover {
+  text-decoration: underline;
+}
+
+.wallet-link code {
+  color: inherit;
+}
+
 .cards {
   display: grid;
   gap: 10px;

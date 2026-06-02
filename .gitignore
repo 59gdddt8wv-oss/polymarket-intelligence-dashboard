@@ -3,3 +3,4 @@ node_modules/
 data/
 dashboard/public/data/
 *.log
+runtime/logs/

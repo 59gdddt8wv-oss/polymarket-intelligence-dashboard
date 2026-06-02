@@ -103,7 +103,7 @@ function renderSmart(data) {
             const e = item.edge || {};
             return `
               <tr>
-                <td><code>${escapeHtml(shortWallet(item.wallet))}</code><div class="subtle">${escapeHtml(item.reason || "")}</div></td>
+                <td>${walletLink(item.wallet)}<div class="subtle">${escapeHtml(item.reason || "")}</div></td>
                 <td><span class="pill ${item.decision === "watch_strong" ? "strong" : "light"}">${escapeHtml(item.decision)}</span><div class="subtle">score ${num(item.watchScore)}</div></td>
                 <td>${money(a.earned15d)}</td>
                 <td>${pct(a.winRatePct15d)}</td>
@@ -224,6 +224,13 @@ function num(value) {
 function shortWallet(wallet) {
   if (!wallet) return "n/a";
   return `${wallet.slice(0, 8)}...${wallet.slice(-6)}`;
+}
+
+function walletLink(wallet) {
+  if (!wallet) return "<code>n/a</code>";
+  const safeWallet = escapeHtml(wallet);
+  const short = escapeHtml(shortWallet(wallet));
+  return `<a class="wallet-link" href="https://polygonscan.com/address/${safeWallet}" target="_blank" rel="noreferrer noopener" title="${safeWallet}"><code>${short}</code></a>`;
 }
 
 function escapeHtml(value) {
